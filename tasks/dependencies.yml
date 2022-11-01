@@ -1,0 +1,11 @@
+---
+
+- name: Install dependencies.
+  become: yes
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{ efk_dependencies }}"
+
+...

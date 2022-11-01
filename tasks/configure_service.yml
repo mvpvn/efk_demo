@@ -1,0 +1,14 @@
+# Configure the Redis instance
+- import_tasks: configure_instance.yml
+  tags: configure_instance
+  when: not redis_sentinel_enabled or redis_is_master
+  
+# Configure Sentinel instance
+- import_tasks: configure_sentinel.yml
+  tags: configure_sentinel
+  when: redis_sentinel_enabled and not redis_is_master
+
+# Configure Sentinel instance
+- import_tasks: configure_slave.yml
+  tags: configure_slave
+  when: redis_sentinel_enabled and not redis_is_master

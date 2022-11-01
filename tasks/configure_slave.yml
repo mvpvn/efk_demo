@@ -1,0 +1,24 @@
+- name: Render Redis slave instance configuration file
+  template:
+    src: redis-slave.conf.j2
+    dest: '{{ redis_install_dir }}/redis_{{ redis_instance_port }}/conf/redis.conf'
+    owner: redis
+    group: redis
+  register: configure_instance_result
+  notify: 
+    - restart instance
+
+- name: Rendering the Systemd Service Unit configuration file for the Redis slave instance
+  template:
+    src: redis.service
+    dest: '{% if ansible_distribution == "CentOS" %}/usr{% endif %}/lib/systemd/system/redis-{{ redis_instance_port }}.service'
+  register: service_instance_result
+  notify: 
+    - restart instance
+
+- name: start the Redis slave instance
+  systemd:
+    name: 'redis-{{ redis_instance_port }}'
+    daemon_reload: yes
+    state: started
+    enabled: yes

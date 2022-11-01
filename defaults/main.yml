@@ -1,0 +1,55 @@
+---
+# The static variables
+redis_bind_interface: 192.168.56.11
+
+redis_install_server_file: 'install_server.sh'
+redis_install_server_config_file_path: '/usr/src/redis-stable/utils/install_server.sh'
+redis_install_dir: /opt/apps
+
+#General Configuration (Must-to-do first)
+redis_daemonize: "yes"
+# pidfile {{ install_dir }}/redis_{{ instance_port }}/run/redis.pid
+redis_pidfile: "{{ redis_install_dir }}/redis_{{ redis_instance_port }}/run/redis.pid"
+
+redis_port: 6379
+
+redis_loglevel: notice
+# logfile {{ install_dir }}/redis_{{ instance_port }}/log/redis.log
+redis_logfile: "{{ redis_install_dir }}/redis_{{ redis_instance_port }}/log/redis.log"
+
+#Very Important step!
+# dir {{ install_dir }}/redis_{{ instance_port }}/data/
+redis_dir: "{{ redis_install_dir }}/redis_{{ redis_instance_port }}/data/"
+redis_config_file_name: "{{ redis_port }}.conf"
+
+# Redis version
+redis_version: '7.0.4'
+# URL from which Redis Server can be downloaded
+redis_download_url: "https://download.redis.io/releases/redis-{{ redis_version }}.tar.gz"
+# Path to the directory in which Redis Server is build
+redis_build_dir: '/usr/local/src/redis-{{ redis_version }}'
+# Redis startup script
+redis_init_script: '{{ redis_build_dir }}/utils/redis_init_script'
+
+redis_dependencies:
+  - build-essential
+
+efk_dependencies:
+  - docker.io
+
+redis_daemon: redis-server
+redis_conf_path: /etc/redis/{{ redis_config_file_name }}
+redis_conf_mode: 0640
+
+redis_allow_debug: local
+
+redis_directories:
+  - /etc/redis
+  - /var/redis
+  - /var/log/redis
+
+redis_instance_port: 6379
+redis_sentinel_port: 26379
+redis_sentinel_enabled: false
+redis_is_master: false
+...

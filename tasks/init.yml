@@ -1,0 +1,25 @@
+- name: Add user group
+  group:
+    name: redis
+    gid: 667
+    system: yes
+
+- name: Add user
+  user:
+    name: redis
+    group: redis
+    uid: 667
+    system: yes
+    shell: /usr/sbin/nologin
+    create_home: no
+
+- name: Create installation directory
+  file:
+    path: '{{ redis_install_dir }}/redis_{{ item.0 }}/{{ item.1 }}'
+    state: directory
+    owner: redis
+    group: redis
+    recurse: yes
+  with_nested: 
+  - ['{{ redis_instance_port }}','{{ redis_sentinel_port }}']
+  - ['conf', 'log', 'run', 'data']

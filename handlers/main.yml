@@ -1,0 +1,11 @@
+---
+- name: restart docker
+  service:
+    name: 'docker'
+    state: restarted
+
+# - name: restart sentinel
+#   service:
+#     name: 'redis-{{ redis_sentinel_port }}'
+#     state: restarted
+...

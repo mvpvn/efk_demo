@@ -1,0 +1,12 @@
+---
+
+- name: Compile Redis source
+  make:
+    chdir: "{{ redis_build_dir }}"
+
+- name: Install Redis.
+  make:
+    chdir: "{{ redis_build_dir }}"
+    target: install
+
+...

@@ -1,0 +1,13 @@
+---
+
+- name: Download and extract redis-{{ redis_version }}.tar.gz
+  become: yes
+  ansible.builtin.unarchive:
+    src: "{{ redis_download_url }}"
+    dest: "{{ redis_build_dir | dirname }}"
+    mode: 0755
+    owner: root
+    group: root
+    remote_src: yes
+
+...

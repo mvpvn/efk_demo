@@ -1,0 +1,11 @@
+[efk1]
+192.168.56.111
+
+[efk_all:vars]
+ansible_user=vagrant
+
+[efk_standalone:children]
+efk1
+
+[efk_all:children]
+efk_standalone

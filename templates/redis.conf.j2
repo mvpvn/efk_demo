@@ -1,0 +1,16 @@
+
+# General
+
+{% include 'redis-common.conf.j2' %}
+
+port {{ redis_port }}
+
+pidfile {{ redis_pidfile }}
+
+dir {{ redis_dir }}
+
+logfile {{ redis_logfile }}
+
+requirepass {{ password }}
+
+masterauth {{ password }}
