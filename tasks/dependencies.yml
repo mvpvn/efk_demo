@@ -8,4 +8,11 @@
     update_cache: yes
   with_items: "{{ efk_dependencies }}"
 
+- name: Install python packages
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    # state: present
+    # update_cache: yes
+  with_items: "{{ pip_dependencies }}"
+
 ...

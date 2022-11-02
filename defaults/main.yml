@@ -4,7 +4,7 @@ redis_bind_interface: 192.168.56.11
 
 redis_install_server_file: 'install_server.sh'
 redis_install_server_config_file_path: '/usr/src/redis-stable/utils/install_server.sh'
-redis_install_dir: /opt/apps
+efk_install_dir: /opt/apps
 
 #General Configuration (Must-to-do first)
 redis_daemonize: "yes"
@@ -35,7 +35,23 @@ redis_dependencies:
   - build-essential
 
 efk_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+  - build-essential
+  - libssl-dev
+  - libffi-dev
+  # - python3-dev
+  - python3-pip
+  - ansible
   - docker.io
+  - ruby
+
+pip_dependencies:
+  - docker-compose
+  - requests
+  # - docker
 
 redis_daemon: redis-server
 redis_conf_path: /etc/redis/{{ redis_config_file_name }}
