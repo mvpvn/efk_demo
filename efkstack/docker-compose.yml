@@ -1,9 +1,9 @@
 version: "3"
 services:
   elasticsearch:
-    image: amazon/opendistro-for-elasticsearch:1.3.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
     container_name: elasticsearch
-    restart: always
+    restart: unless-stopped
     environment:
       - cluster.name=elasticsearch
       - node.name=elasticsearch
@@ -11,7 +11,10 @@ services:
       - cluster.initial_master_nodes=elasticsearch
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
-      - opendistro_security.ssl.http.enabled=false
+      # - opendistro_security.ssl.http.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.enrollment.enabled=true
+      - discovery.type=single-node
     ulimits:
       memlock:
         soft: -1
@@ -27,7 +30,7 @@ services:
     networks:
       - traefik-net
   kibana:
-    image: yashlogic/amazon-opendistro-for-elasticsearch-kibana-logtrail:1.3.0
+    image: docker.elastic.co/kibana/kibana:8.5.0
     container_name: kibana
     restart: always
     ports:
@@ -42,10 +45,10 @@ services:
   fluentd:
     build: ./fluentd
     volumes:
-      - ./fluentd/conf:/fluentd/etc
+      - ./fluentd/conf:/fluentd/etc:rw
     links:
       - "elasticsearch"
-    restart: always
+    restart: unless-stopped
     container_name: fluentd
     ports:
       - "24224:24224"

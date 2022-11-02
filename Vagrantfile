@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
       s.vm.network "private_network", ip: "192.168.56.11#{i}"
       s.vm.provider "virtualbox" do |vb|
         vb.gui = false
-        vb.memory = "8192"
+        vb.memory = "2048"
       end
     end
     if ARGV[0] == 'up'
