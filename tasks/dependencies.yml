@@ -9,10 +9,9 @@
   with_items: "{{ efk_dependencies }}"
 
 - name: Install python packages
+  become: yes
   ansible.builtin.pip:
     name: "{{ item }}"
-    # state: present
-    # update_cache: yes
   with_items: "{{ pip_dependencies }}"
 
 ...

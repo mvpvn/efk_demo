@@ -1,7 +1,6 @@
 - hosts: efk_all
   become: yes
   gather_facts: yes
-  # vars:
-  #   - redis_sentinel_enabled: false
+  
   roles:
     - ../..

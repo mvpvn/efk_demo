@@ -1,6 +1,0 @@
-
-# Slave
-
-{% include 'redis.conf.j2' %}
-
-slaveof {{ groups['redis_sentinel_master'][0] }} {{ redis_instance_port }}

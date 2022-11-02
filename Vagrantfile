@@ -4,8 +4,8 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "bento/ubuntu-20.04"
   # config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.ssh.private_key_path = "~/.ssh/id_rsa"
-  config.ssh.forward_agent = true
+  # config.ssh.private_key_path = "~/.ssh/id_rsa"
+  # config.ssh.forward_agent = true
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
   # config.ssh.insert_key = false
   (1..1).each do |i|
