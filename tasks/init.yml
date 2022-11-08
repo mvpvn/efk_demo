@@ -7,13 +7,13 @@
 
 # - name: Copy file with owner and permissions
 #   copy:
-#     src: ./efkstack/fluentd/conf/fluentd.conf
+#     src: ./efk/fluentd/conf/fluentd.conf
 #     dest: '/fluentd/etc'
 #     mode: '0644'
 
 - name: Copy file with owner and permissions
   copy:
-    src: ./efkstack
+    src: ./efk
     dest: '{{ efk_install_dir }}'
     mode: '0644'
 

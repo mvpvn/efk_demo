@@ -3,7 +3,7 @@
 - name: Deploy Docker Compose stack
   become: yes
   community.docker.docker_compose:
-    project_src: '{{ efk_install_dir }}/efkstack'
+    project_src: '{{ efk_install_dir }}/efk'
     files:
     - docker-compose.yml
 
