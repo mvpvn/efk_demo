@@ -6,7 +6,7 @@ volumes:
 
 # Deploying three container services (fluentd, elasticsearch, and kibana)
 services:
-	# Deploy using the custom image automatically be created during the build process.
+# Deploy using the custom image automatically be created during the build process.
   fluentd: 
     build: ./fluentd
     links: # Sends incoming logs to the elasticsearch container.
@@ -17,7 +17,7 @@ services:
       - 24224:24224
       - 24224:24224/udp
 
-	# Created using the Docker image elasticsearch:7.17.0
+# Created using the Docker image elasticsearch:7.17.0
   elasticsearch:
     image: elasticsearch:7.17.0
     expose: # Exposes the default port 9200
@@ -27,7 +27,7 @@ services:
     volumes: # Stores elasticsearch data locally on the esdata Docker volume
       - esdata:/usr/share/elasticsearch/data
 
-	# Created using the Docker image kibana:7.17.0
+# Created using the Docker image kibana:7.17.0
   kibana:
     image: kibana:7.17.0
     links: # Links kibana service to the elasticsearch container
